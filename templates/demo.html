@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Demo</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% comment %} <link rel="stylesheet" href="/static/style.css"> {% endcomment %}
+</head>
+
+<body>
+    <div class="reg_block">
+        <h1>Registration</h1>
+
+        <div class="reg_rowOne">
+            <div class="reg_name">
+                <p id="name">Full Name</p>
+                <input type="text" placeholder="E.g: John Smith" class="search_bar">
+            </div>
+            <div class="reg_user">
+                <p id="userName">UserName</p>
+                <input type="text" placeholder="JohnWC98" class="search_bar">
+            </div>
+        </div>
+
+
+
+         <div class="reg_rowTwo">
+            <div class="reg_email">
+                <p id="email">Email</p>
+                <input type="text" placeholder="Xyz@gmail.com" class="search_bar">
+            </div>
+            <div class="reg_number">
+                <p id="number">Phone Number</p>
+                <input type="number" placeholder="021-201-521" class="search_bar">
+            </div>
+        </div>
+
+
+
+
+        <div class="reg_rowThree">
+            <div class="reg_password">
+                <p id="password">Password</p>
+                <input type="password" placeholder="***********" class="search_bar">
+            </div>
+            <div class="reg_Cpassword">
+                <p id="Cpassword">Confrim Password</p>
+                <input type="password" placeholder="***********" class="search_bar">
+            </div>
+        </div>
+
+
+
+        <div class="reg_gender">
+            <p>Gender</p>
+            <input type="radio" name="gender"  class="select"> Male
+            <input type="radio" name = "gender" class="select"> Female
+            <input type="radio" name = "gender" class="select"> prefer not to say
+        </div>
+
+
+    
+        <div class="button"><p id="submit_btn">Register</p>
+           
+        </div>
+
+    </div>
+
+</body>
+
+</html> 

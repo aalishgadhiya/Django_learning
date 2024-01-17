@@ -1,0 +1,83 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f3f3;
+    min-height: 100vh; 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+
+.reg_block {
+    height: 500px;
+    width: 500px;
+    background-color: black;
+    border-radius: 12px;
+    background-color: #fff; 
+}
+
+h1{
+    margin-left: 15px;
+}
+
+
+
+
+p{
+    font-size: 20px;
+    margin : 0;
+    font-weight: 565;
+    
+}
+
+.search_bar{
+    width: 200px;
+    display: block; 
+    margin-bottom: 15px; 
+    padding: 10px;  
+    box-sizing: border-box;     
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+}
+
+
+.reg_rowOne , .reg_rowTwo , .reg_rowThree{
+    display: flex;
+    justify-content: start;
+    margin-left: 15px;
+}
+
+
+
+.reg_user , .reg_number , .reg_Cpassword{
+    margin-left: 40px;
+}
+
+
+
+.reg_gender{
+    margin-left: 15px;
+}
+
+
+.select{
+    margin-left: 35px;
+    margin-top: 20px;
+}
+
+
+
+
+
+.button{
+    margin: 30px;
+    margin-left: 45px;
+    height: 50px;
+    width: 400px;
+    background-color: lightslategray;
+    border-radius: 5px;
+   text-align: center;
+
+}
+
+#submit_btn{padding-top: 13px;}

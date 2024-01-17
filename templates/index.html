@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block contant %}
+
+     {% comment %} section {% endcomment %}
+     <b>{{d}}</b>
+     <hr>
+     <b>
+         <p>forloop in django template</p>
+     </b>
+     {% for n in list %}
+     <div>{{forloop.counter}}. {{n}}</div>
+     {% comment %} <div>{{forloop.first}}. {{n}}</div> {% endcomment %}
+     {% endfor %}
+     
+     <br>
+     <div class="container">
+         <table class="table">
+             <thead>
+                 <tr>
+                     <th scope="col">Id</th>
+                     <th scope="col">Name</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 {% for d in student_details %}
+                 <tr>
+                     <th scope="row">{{d.id}}</th>
+                     <td>{{d.name}}</td>
+                 </tr>
+                 {% endfor %}
+             </tbody>
+         </table>
+     </div>
+     
+     {% if numbers|length > 0%}
+     {% for n in numbers %}
+     {% if n > 20 %}
+     <div>{{n}}</div>
+     {% endif %}
+     {% endfor %}
+     {% else %}
+     data not found
+     {% endif %}
+     
+{% endblock %}
+</body>
+
+</html>
