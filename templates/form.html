@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block contant %}
+
+<div class="container">
+    <h1 class="text-center">User Form</h1>
+
+    <div class="row">
+        <div class="col-12">
+            <form method = "post" action="/submit-form">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="val_1" class="form-label">Value 1 :</label>
+                    <input type="numbers" class="form-control" id="val_1" name="num1"
+                        placeholder="Enter Value 1">
+                </div>
+                <div class="mb-3">
+                    <label for="val_2" class="form-label">Value 2 :</label>
+                    <input type="numbers" class="form-control" id="val_2" name="num2"
+                        placeholder="Enter Value 2">
+                </div>
+                <div>
+                    <input type="submit" class="btn btn-secondary">
+                </div>
+                <div>
+                   OUTPUT =  {{output}}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
