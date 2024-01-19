@@ -5,7 +5,19 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-4 d-flex justify-content-between mt-2">
+       
+       {% for data in blogData %} 
+               <div class="col-4 d-flex justify-content-between mt-2">
+                   <div class="card" style="width: 18rem;">
+                       <div class="card-body">
+                         <h5 class="card-title">{{data.blog_title}}</h5>
+                         <p class="card-text">{{data.blog_dis}}</p>
+                         <a href="#" class="btn btn-primary">Go somewhere</a>
+                       </div>
+                     </div> 
+               </div>
+       {% endfor %}
+        <!-- <div class="col-4 d-flex justify-content-between mt-2">
             <div class="card" style="width: 18rem;height: 250px;">
                 <div class="card-body">
                   <h5 class="card-title">Special title treatment</h5>
@@ -31,16 +43,7 @@
                   <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
               </div> 
-        </div>
-        <div class="col-4 d-flex justify-content-between mt-2">
-            <div class="card" style="width: 18rem;height: 250px;">
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div> 
-        </div>
+        </div> -->
     </div>
 </div>
 

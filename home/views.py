@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
-
+from home.models import Blog
+from home.models import News
 
 def index(request):
     DATA = {
@@ -101,4 +102,25 @@ def calculatorPage(request):
     
     
 def blogPage(request):
-    return render(request,"blog.html")
+    blogData = Blog.objects.all()
+    data={
+        "blogData":blogData
+    }
+    return render(request,"blog.html",data)
+
+
+
+def newsPage(request):
+    newsData = News.objects.all()
+    data={
+        'newsData':newsData
+    }
+    return render(request,"news.html",data)
+
+
+def newsdetailsPage(request,newsid):
+    newsData = News.objects.get(id=newsid)
+    data={
+        'newsData':newsData
+    }
+    return render(request,"detailNews.html",data)

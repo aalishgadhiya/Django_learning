@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home',
 ]
 
 MIDDLEWARE = [
@@ -81,10 +82,12 @@ WSGI_APPLICATION = 'demo11.wsgi.application'
 #     }
 # }
 
+print("----config('ENGINE'-----", config)
+
 DATABASES = {
     'default': {
         'ENGINE': config('ENGINE'),
-        'NAME': config('NAME'),
+        'NAME': config('NAME'),    
         'USER': config('USER'),
         'PASSWORD': config('PASSWORD'),
         'HOST':config('HOST'),

@@ -45,6 +45,10 @@
                 <a class="nav-link {% if request.path == '/blog-page' %} active {% endif %}"  href="/blog-page">Blog</a> 
                 {% comment %} <a class="nav-link" href="{% url 'about-us' %}">About Us</a> {% endcomment %}
               </li>
+              <li class="nav-item">
+                <a class="nav-link {% if request.path == '/news-page' %} active {% endif %}"  href="/news-page">News</a> 
+                {% comment %} <a class="nav-link" href="{% url 'about-us' %}">About Us</a> {% endcomment %}
+              </li>
             </ul>
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
