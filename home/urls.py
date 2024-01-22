@@ -11,4 +11,5 @@ urlpatterns = [
     path("news-page",views.newsPage,name="news-page"),
     path("newsdetails-page/<newsid>",views.newsdetailsPage,name="newsdetails-page"),
     # path("<slug:id>",views.course,name = "course")
+    path("first/hello",views.hello_world_api)
 ]

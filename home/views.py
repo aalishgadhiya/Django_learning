@@ -2,9 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from home.models import Blog
 from home.models import News
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 
 def index(request):
-    DATA = {
+    DATA = {    
         "title": "Django-Practice Site",
         "d":"HELLO,OP!!!!!!",
         "list":["alish","ayush","parth","meet"],
@@ -124,3 +127,14 @@ def newsdetailsPage(request,newsid):
         'newsData':newsData
     }
     return render(request,"detailNews.html",data)
+
+
+@api_view(['POST','GET','PATCH'])
+def hello_world_api(request):
+    return Response({'status' : 200,'message':f'hello world, this is a {request.method} method'})  
+    # if request.method == "POST":
+    #     return Response({'status' : 200,'message': 'hello world, this is a Post Method'})
+    # elif request.method == "GET":
+    #     return Response({'status' : 200,'message': 'hello world, this is a Get Method'})
+    # elif request.method == "PATCH": 
+    #     return Response({'status' : 200,'message':'hello world, this is a patch method'})   
