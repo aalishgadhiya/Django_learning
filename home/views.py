@@ -2,8 +2,52 @@ from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
 from home.models import Blog
 from home.models import News
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,action
 from rest_framework.response import Response
+from home.models import Company,Employee
+from home.serializer import CompanySerializer,EmployeeSerializer,RegisterSerializer,LoginSerializer
+from rest_framework import viewsets
+from django.contrib.auth import authenticate
+from rest_framework.views import APIView
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+
+
+
+
+
+
+
+class LoginAPI(APIView):
+    def post(self,request):
+        data = request.data
+        serializer = LoginSerializer(data=data)
+        if not serializer.is_valid():
+           return Response({'status':False,'message':serializer.errors}) 
+       
+        print("-----------------------",serializer.data)
+        user = authenticate(username = serializer.data['username'],email=serializer.data['email'],password=serializer.data['password'])
+        
+        if not user:
+            return Response({'status':False,'message':'invalid credentials'}) 
+
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({'status':True,'message':'user login','token':token.key})
+        
+
+
+class RegisterAPI(APIView):
+    
+    def post(self,request):
+        data =request.data
+        serializer = RegisterSerializer(data=data)  
+        
+        if not serializer.is_valid():
+           return Response({'status':False,'message':serializer.errors}) 
+       
+        serializer.save()
+        return Response({'status':True,'message':'user created'})         
 
 
 def index(request):
@@ -35,7 +79,7 @@ def aboutus(request):
         "output":output
     }
     return render(request,"aboutus.html",DATA)
-
+    
 
 
 def formpage(request):
@@ -131,6 +175,10 @@ def newsdetailsPage(request,newsid):
 
 @api_view(['POST','GET','PATCH'])
 def hello_world_api(request):
+    print(request.method)
+    data =request.data
+    print("****------")
+    print(data['name'])
     return Response({'status' : 200,'message':f'hello world, this is a {request.method} method'})  
     # if request.method == "POST":
     #     return Response({'status' : 200,'message': 'hello world, this is a Post Method'})
@@ -138,3 +186,71 @@ def hello_world_api(request):
     #     return Response({'status' : 200,'message': 'hello world, this is a Get Method'})
     # elif request.method == "PATCH": 
     #     return Response({'status' : 200,'message':'hello world, this is a patch method'})   
+    
+    
+  
+  
+# @api_view(['GET','POST','PATCH','DELETE'])  
+# def CompanyDetails(request):
+#     if request.method == "GET":
+#         obj = Company.objects.all()
+#         serializer = CompanySerializer(obj,many=True)
+#         return Response(serializer.data) 
+#     elif request.method == "POST":
+#         data = request.data
+#         serializer = CompanySerializer(data=data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors)   
+#     elif request.method == "PATCH":
+#         data = request.data 
+#         obj = Company.objects.get(company_id = data['company_id'])
+#         serializer = CompanySerializer(obj,data=data,partial=True)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors)
+#     else:
+#         data  = request.data 
+#         obj = Company.objects.get(company_id = data['company_id'])
+#         obj.delete()
+#         return Response({'message':'company_details deleted'})
+    
+    
+    
+
+class CompanyViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    queryset = Company.objects.all()
+    serializer_class = CompanySerializer
+    
+    @action(detail=True,methods=['get'])
+    def employees(self,request,pk=None):
+        print(f"get employee of {pk} company")
+        company = Company.objects.get(pk=pk)
+        emp = Employee.objects.filter(company_name=company)
+        emp_serializer = EmployeeSerializer(emp,many=True,context={'request':request})
+        return Response(emp_serializer.data)
+        
+    
+class EmplyoeeViewSet(viewsets.ModelViewSet):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+    
+    
+    def list(self,request):
+        search =request.GET.get('search')
+        queryset = self.queryset
+        if search:
+            queryset = queryset.filter(emoloyee_name__startswith =search) 
+            
+        serializer = EmployeeSerializer(queryset,many=True)     
+        return Response({'status':200,'data':serializer.data})
+        
+    
+    
+    
+        

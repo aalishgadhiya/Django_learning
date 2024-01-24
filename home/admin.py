@@ -1,5 +1,5 @@
 from django.contrib import admin
-from home.models import Blog,News
+from home.models import Blog,News,Employee,User_data
 
 
 class BlogAdmin(admin.ModelAdmin):
@@ -11,4 +11,6 @@ class NewsAdmin(admin.ModelAdmin):
 
 admin.site.register(Blog,BlogAdmin)
 admin.site.register(News,NewsAdmin)
+admin.site.register(Employee)
+admin.site.register(User_data)
 
