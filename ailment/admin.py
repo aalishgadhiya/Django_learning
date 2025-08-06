@@ -26,7 +26,7 @@ class AilmentAdmin(admin.ModelAdmin):
         }
 
     def export_and_create_pr(self, request, queryset):
-        github_token = "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"
+        github_token = "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"
         repo_name = "aalishgadhiya/Django_learning"
         # base_branch = "develop"
         branch_name = "master"
