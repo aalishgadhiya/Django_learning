@@ -29,7 +29,7 @@ class AilmentAdmin(admin.ModelAdmin):
         github_token = "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"
         repo_name = "aalishgadhiya/Django_learning"
         # base_branch = "develop"
-        branch_name = "main"
+        branch_name = "master"
         export_folder_rel = "ailment/fixtures/ailments"
 
         tmp_dir = tempfile.mkdtemp()
@@ -39,7 +39,7 @@ class AilmentAdmin(admin.ModelAdmin):
             "git", "clone", f"https://{github_token}@github.com/{repo_name}.git", repo_path
         ], check=True)
 
-        subprocess.run(["git", "checkout", "-b", branch_name], cwd=repo_path, check=True)
+        subprocess.run(["git", "checkout", branch_name], cwd=repo_path, check=True)
 
         export_folder = os.path.join(repo_path, export_folder_rel)
         os.makedirs(export_folder, exist_ok=True)
@@ -53,6 +53,6 @@ class AilmentAdmin(admin.ModelAdmin):
 
         subprocess.run(["git", "add", "."], cwd=repo_path, check=True)
         subprocess.run(["git", "commit", "-m", "Auto-export ailments data"], cwd=repo_path, check=True)
-        subprocess.run(["git", "push", "--set-upstream", "origin", branch_name], cwd=repo_path, check=True)
+        subprocess.run(["git", "push", "origin", branch_name], cwd=repo_path, check=True)
 
         self.message_user(request, f"Exported and pushed branch: {branch_name}")
